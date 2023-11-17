@@ -8,11 +8,13 @@ def random_string(prefix, maxlen):
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
-def test_add_project(app):
-    #app.session.login("administrator", "root")
-    old_projects = app.project.get_project_list()
+def test_add_project(app, config):
+    # app.session.login("administrator", "root")
+    # old_projects = app.project.get_project_list()
+    old_projects = app.soap.get_project_list(config['webadmin']['username'], config['webadmin']['password'])
     project = Project(name=random_string("project_name: ", 10))
     app.project.create_project(project)
-    new_projects = app.project.get_project_list()
+    # new_projects = app.project.get_project_list()
+    new_projects = app.soap.get_project_list(config['webadmin']['username'], config['webadmin']['password'])
     old_projects.append(project)
     assert sorted(old_projects, key=Project.sorted_name) == sorted(new_projects, key=Project.sorted_name)
