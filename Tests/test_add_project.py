@@ -9,7 +9,7 @@ def random_string(prefix, maxlen):
 
 
 def test_add_project(app):
-    app.session.login("administrator", "root")
+    #app.session.login("administrator", "root")
     old_projects = app.project.get_project_list()
     project = Project(name=random_string("project_name: ", 10))
     app.project.create_project(project)

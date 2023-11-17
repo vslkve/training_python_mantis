@@ -3,9 +3,9 @@ import random
 
 
 def test_delete_project(app):
-    app.session.login("administrator", "root")
+    #app.session.login("administrator", "root")
     if len(app.project.get_project_list()) == 0:
-        app.project.create(Project(name="newproject"))
+        app.project.create_project(Project(name="newproject"))
     old_projects = app.project.get_project_list()
     project = random.choice(old_projects)
     app.project.delete_project_by_name(Project(name=project.name))
